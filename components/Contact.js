@@ -1,13 +1,7 @@
 import React from 'react';
 
-class Contact extends React.Component {
-  render () {
-    return (
-      <li>
-        {this.props.contact.name} {this.props.contact.phone}
-      </li>
-    )
-  }
-}
+// Dumb Component: Stateless & Functional
+const Contact = ({contact, item}) =>
+<li>{contact.name} {contact.phone} {item}</li>
 
 export default Contact;

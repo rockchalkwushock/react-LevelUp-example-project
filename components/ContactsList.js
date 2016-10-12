@@ -49,7 +49,7 @@ class ContactsList extends React.Component {
                 </form>
                 <ul>
                     {filterContacts.map((contact) => {
-                        return <Contact contact={contact} key={contact.id}/>
+                        return <Contact contact={contact} item='hello' key={contact.id}/>
                     })}
                 </ul>
             </div>
