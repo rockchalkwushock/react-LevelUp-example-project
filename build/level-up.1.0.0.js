@@ -21520,15 +21520,17 @@
 	var ContactsList = function (_React$Component) {
 	  _inherits(ContactsList, _React$Component);
 	
-	  function ContactsList() {
+	  function ContactsList(props) {
 	    _classCallCheck(this, ContactsList);
 	
-	    var _this = _possibleConstructorReturn(this, (ContactsList.__proto__ || Object.getPrototypeOf(ContactsList)).call(this));
+	    var _this = _possibleConstructorReturn(this, (ContactsList.__proto__ || Object.getPrototypeOf(ContactsList)).call(this, props));
 	
 	    _this.state = {
-	      search: '' // initial state of input region (empty).
+	      search: '', // initial state of input region (empty).
+	      contacts: props.contacts
 	    };
 	    _this.updateSearch = _this.updateSearch.bind(_this);
+	    _this.addContact = _this.addContact.bind(_this);
 	    return _this;
 	  }
 	
@@ -21539,17 +21541,45 @@
 	      this.setState({ search: event.target.value.substr(0, 10) });
 	    }
 	  }, {
+	    key: 'addContact',
+	    value: function addContact(event) {
+	      event.preventDefault();
+	      // console.log(this); // shows all of what this pertains to for the component: ContactsList.
+	      var name = this.refs.name.value;
+	      var phone = this.refs.phone.value;
+	      var id = Math.floor(Math.random() * 100 + 1);
+	      this.setState({
+	        // NOTE: DO NOT USE .push()!!
+	        // It changes this.state BAD JUJU!!!
+	        // Instead use .concat() - does not permanetly change the array.
+	        contacts: this.state.contacts.concat({ id: id, name: name, phone: phone })
+	      });
+	      this.refs.name.value = '';
+	      this.refs.phone.value = '';
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
 	
-	      var filterContacts = this.props.contacts.filter(function (contact) {
+	      var filterContacts = this.state.contacts.filter(function (contact) {
 	        return contact.name.toLowerCase().indexOf(_this2.state.search.toLowerCase()) !== -1;
 	      });
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement('input', { type: 'text', placeholder: 'Text here', value: this.state.search, onChange: this.updateSearch }),
+	        _react2.default.createElement('input', { type: 'text', placeholder: 'Search Contacts', value: this.state.search, onChange: this.updateSearch }),
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: this.addContact },
+	          _react2.default.createElement('input', { type: 'text', ref: 'name', placeholder: 'Contact Name' }),
+	          _react2.default.createElement('input', { type: 'text', ref: 'phone', placeholder: 'Contact Phone' }),
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'submit' },
+	            'Add Contact'
+	          )
+	        ),
 	        _react2.default.createElement(
 	          'ul',
 	          null,
