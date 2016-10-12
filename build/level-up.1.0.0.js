@@ -68,10 +68,27 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var contacts = {
+	var contacts = [{
+	  id: 1,
 	  name: 'Cody',
 	  phone: '012 345 6789'
-	};
+	}, {
+	  id: 2,
+	  name: 'Moe',
+	  phone: '123 867 5309'
+	}, {
+	  id: 3,
+	  name: 'Curly',
+	  phone: '978 654 3210'
+	}, {
+	  id: 4,
+	  name: 'Larry',
+	  phone: '111 222 3333'
+	}, {
+	  id: 5,
+	  name: 'Tiffany',
+	  phone: '711 187 4444'
+	}];
 	
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
@@ -21479,6 +21496,78 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Contact = __webpack_require__(173);
+	
+	var _Contact2 = _interopRequireDefault(_Contact);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ContactsList = function (_React$Component) {
+	    _inherits(ContactsList, _React$Component);
+	
+	    function ContactsList() {
+	        _classCallCheck(this, ContactsList);
+	
+	        var _this = _possibleConstructorReturn(this, (ContactsList.__proto__ || Object.getPrototypeOf(ContactsList)).call(this));
+	
+	        _this.state = {
+	            search: 'Level Up'
+	        };
+	        _this.updateSearch = _this.updateSearch.bind(_this);
+	        return _this;
+	    }
+	
+	    _createClass(ContactsList, [{
+	        key: 'updateSearch',
+	        value: function updateSearch(event) {
+	            console.log(event.target.value);
+	            this.setState({ search: event.target.value.substr(0, 10) });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'ul',
+	                    null,
+	                    this.props.contacts.map(function (contact) {
+	                        return _react2.default.createElement(_Contact2.default, { contact: contact, key: contact.id });
+	                    })
+	                ),
+	                _react2.default.createElement('input', { type: 'text', value: this.state.search, onChange: this.updateSearch })
+	            );
+	        }
+	    }]);
+	
+	    return ContactsList;
+	}(_react2.default.Component);
+	
+	exports.default = ContactsList;
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
@@ -21496,36 +21585,32 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var ContactsList = function (_React$Component) {
-	  _inherits(ContactsList, _React$Component);
+	var Contact = function (_React$Component) {
+	  _inherits(Contact, _React$Component);
 	
-	  function ContactsList() {
-	    _classCallCheck(this, ContactsList);
+	  function Contact() {
+	    _classCallCheck(this, Contact);
 	
-	    return _possibleConstructorReturn(this, (ContactsList.__proto__ || Object.getPrototypeOf(ContactsList)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (Contact.__proto__ || Object.getPrototypeOf(Contact)).apply(this, arguments));
 	  }
 	
-	  _createClass(ContactsList, [{
+	  _createClass(Contact, [{
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'ul',
+	        'li',
 	        null,
-	        _react2.default.createElement(
-	          'li',
-	          null,
-	          this.props.contacts.name,
-	          ' ',
-	          this.props.contacts.phone
-	        )
+	        this.props.contact.name,
+	        ' ',
+	        this.props.contact.phone
 	      );
 	    }
 	  }]);
 	
-	  return ContactsList;
+	  return Contact;
 	}(_react2.default.Component);
 	
-	exports.default = ContactsList;
+	exports.default = Contact;
 
 /***/ }
 /******/ ]);
